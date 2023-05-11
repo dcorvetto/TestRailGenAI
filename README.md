@@ -5,9 +5,11 @@ EXAMPLE
 
 In Terminal run the following
 
+```
 $ python3 integrateTestRailOpenAI.py
+```
 
-Please enter test case description: Login into app
+```Please enter test case description: Login into app```
 
 The following prompt will be sent to openAI API:
 
@@ -33,4 +35,4 @@ Expected Results:
 
 Once script finishes, the following message will display:
 
-Test Case created successfully in TestRail.
+```Test Case created successfully in TestRail.```
