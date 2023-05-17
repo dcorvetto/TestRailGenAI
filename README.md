@@ -14,25 +14,44 @@ $ python3 integrateTestRailOpenAI.py
 The following prompt will be sent to openAI API:
 
 """<br>
-You are a QA engineer helping to generate a test case based on a prompt . Use this format, replacing text in brackets with the result. Do not include the brackets in the output:<br>
- [Title based on the prompt]<br>
- [Steps based on the prompt]<br>
- [Expected results based on the prompt]<br>
+You are a QA engineer helping to generate test scenarios based on a prompt. Based on each test scenario, help to generate at least 4 test cases. Use this format replacing text in brackets with the result. Do not include the brackets in the output:<br>
+ Test case [number of test case]<br>
+ [Title: title of test case based on the prompt]<br>
+ [Steps: list of steps based on the prompt]<br>
+ [Expected results: list of results based on the prompt]<br>
 """<br>
 Login into app\n
 
-The following suggestion will be delivered by openAI :
+The following suggestions will be delivered by openAI :
 
-Title: Verify login into app 
+Test case 1
+ Title: Check login functionality
+ Steps:
+ 1. Enter valid username
+ 2. Enter valid password
+ 3. Click the login button
+Expected results:
+ 1. User is logged in
+ 2. Home page of the application is displayed
+ 3. Successful login message is displayed
+ 4. User should be able to access the features of the application
 
-Steps:
-1. Navigate to the app login page
-2. Enter valid username and password
-3. Click the "Login" button
+Test case 2
+ Title: Check login failure with invalid credentials
+ Steps:
+ 1. Enter invalid username
+ 2. Enter invalid password
+ 3. Click the login button
+Expected results:
+ 1. User is not logged in
+ 2. Login page should be displayed
+ 3. Error message is displayed
+ 4. User should not be able to access the features of the application
+ 
+ ....
 
-Expected Results:
-1. User should be logged into the app successfully.
+Once script finishes, the following messages will display:
 
-Once script finishes, the following message will display:
-
-```Test Case created successfully in TestRail.```
+```Total Tokens: 425
+Test Case 1 created successfully in TestRail.
+Test Case 2 created successfully in TestRail.```
