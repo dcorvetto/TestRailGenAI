@@ -6,10 +6,10 @@ STEPS
 1- Create config.py file locally with the following data:
 
 ```
-openai_api_key = [openai key]
-testRail_username = [testrail username]
-testRail_password = [testrail password]
-testRail_URL = [testrail url]
+openai_api_key = "[openai key]"
+testRail_username = "[testrail username]"
+testRail_password = "[testrail password]"
+testRail_URL = "[testrail url]"
 testRail_project_id = [testrail project id]
 testRail_suite_id = [testrial suite id]
 testRail_section_id = [testrail section id]
