@@ -1,13 +1,27 @@
 # TestRailGenAI
 Generate test cases in TestRail using openAI suggestions
 
-EXAMPLE
+STEPS
 
-In Terminal run the following
+1- Create config.py file locally with the following data:
 
+```
+openai_api_key = [openai key]
+testRail_username = [testrail username]
+testRail_password = [testrail password]
+testRail_URL = [testrail url]
+testRail_project_id = [testrail project id]
+testRail_suite_id = [testrial suite id]
+testRail_section_id = [testrail section id]
+```
+Replace text between brackets with your respective account's data.
+
+2- Run script in terminal:
 ```
 $ python3 integrateTestRailOpenAI.py
 ```
+
+EXAMPLE RESPONSE
 
 ```Please enter test case description: Login into app```
 
