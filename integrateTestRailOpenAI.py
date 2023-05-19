@@ -39,9 +39,6 @@ response = openai.Completion.create(
   presence_penalty=0
 )
 
-time.sleep(5)
-
-
 if 'choices' in response:
         if len(response['choices']) > 0: 
             answer = response['choices'][0]['text']
@@ -64,10 +61,11 @@ for tc in test_cases:
         tc_aux = tc.replace("Test case", "")
         test_case_text_aux1 = tc_aux.replace("Title:", "|")
         test_case_text_aux2 = test_case_text_aux1.replace("Steps:", "|")
-        test_case_text_aux3 = test_case_text_aux2.replace("Expected results:", "|")
-
-        test_case_text = test_case_text_aux3.split("|")
-        if len(test_case_text) > 3:
+       
+        if  "Expected results:" in test_case_text_aux2:
+            test_case_text_aux3 = test_case_text_aux2.replace("Expected results:", "|")
+           
+            test_case_text = test_case_text_aux3.split("|")
             title = test_case_text[1].replace("|","")
             steps = test_case_text[2].replace("|","")
             test_case_title = title
