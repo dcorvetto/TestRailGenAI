@@ -2,6 +2,7 @@ import requests
 import json
 import openai
 import config
+import time
 
 # TestRail Authentication
 URL = config.testRail_URL
@@ -32,11 +33,14 @@ response = openai.Completion.create(
   model="text-davinci-003",
   prompt=openai_prompt,
   temperature=0.6,
-  max_tokens=350,
+  max_tokens=450,
   top_p=1,
   frequency_penalty=0,
   presence_penalty=0
 )
+
+time.sleep(5)
+
 
 if 'choices' in response:
         if len(response['choices']) > 0: 
@@ -63,29 +67,30 @@ for tc in test_cases:
         test_case_text_aux3 = test_case_text_aux2.replace("Expected results:", "|")
 
         test_case_text = test_case_text_aux3.split("|")
-        title = test_case_text[1].replace("|","")
-        steps = test_case_text[2].replace("|","")
-        test_case_title = title
-        test_case_steps = steps
-        test_case_expected_results = test_case_text[3]
+        if len(test_case_text) > 3:
+            title = test_case_text[1].replace("|","")
+            steps = test_case_text[2].replace("|","")
+            test_case_title = title
+            test_case_steps = steps
+            test_case_expected_results = test_case_text[3]
 
-        # Create test case in TestRail
-        testrail_url = f"{URL}/index.php?/api/v2/add_case/{section_id}"
-        testrail_headers = {
-            "Content-Type": "application/json"
-        }
-        testrail_payload = {
-            "title": test_case_title,
-            "custom_steps": test_case_steps,
-            "custom_expected": test_case_expected_results,
-            "suite_id": suite_id,
-            "section_id": section_id
-        }
-        response = requests.post(testrail_url, auth=(USERNAME, PASSWORD), headers=testrail_headers, json=testrail_payload)
+            # Create test case in TestRail
+            testrail_url = f"{URL}/index.php?/api/v2/add_case/{section_id}"
+            testrail_headers = {
+                "Content-Type": "application/json"
+            }
+            testrail_payload = {
+                "title": test_case_title,
+                "custom_steps": test_case_steps,
+                "custom_expected": test_case_expected_results,
+                "suite_id": suite_id,
+                "section_id": section_id
+            }
+            response = requests.post(testrail_url, auth=(USERNAME, PASSWORD), headers=testrail_headers, json=testrail_payload)
 
-        if response.status_code == 200:
-            print("Test Case " +str(i)+ " created successfully in TestRail.")
-        else:
-            print("Error creating test case " +str(i)+ " in TestRail:", response.content)
+            if response.status_code == 200:
+                print("Test Case " +str(i)+ " created successfully in TestRail.")
+            else:
+                print("Error creating test case " +str(i)+ " in TestRail:", response.content)
         
     i += 1
